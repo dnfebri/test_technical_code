@@ -7,11 +7,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/segitiga', function(req, res, next) {
-  console.log(req.query);
+  let x = "1"
   const arry = String(req.query.input).split("").map((num, idx) => {
-    return num * (1 + idx);
+    x = x + "0";
+    if(num == 0) {
+      return num + x.replace("1", "");
+    }
+    return num * Number(x);
   })
-  console.log(arry);
 
   return res.status(200).json({
     result: "segitiga",
