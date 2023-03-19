@@ -1,29 +1,67 @@
-let result = document.getElementById("result")
-let input = document.getElementById("input")
+let result = document.getElementById("result");
+let input = document.getElementById("input");
 const xhttp = new XMLHttpRequest();
 
 const segitiga = async () => {
   result.innerHTML = "";
   let value = await input.value;
   xhttp.onload = (el) => {
-    console.log(el.target.response);
     const response = JSON.parse(el.target.response);
-    response.arry.forEach(el => {
-      let nodeP = document.createElement("p");
-      nodeP.innerText = el
-      result.appendChild(nodeP);
-    }); 
-  }
+    if (response.msg) {
+      return alert(response.msg);
+    }
+    response.arry.forEach((el) => {
+      let elementP = document.createElement("p");
+      elementP.innerText = el;
+      result.appendChild(elementP);
+    });
+  };
   xhttp.open(
     "POST",
-    `http://localhost:3000/generate/segitiga?input=` + value, 
+    `http://localhost:3000/generate/segitiga?input=` + value,
     true
   );
   xhttp.send();
-}
+};
 const ganjil = () => {
-  console.log("ganji");
-}
-const prisma = () => {
-  console.log("prisma");
-}
+  result.innerHTML = "";
+  let value = input.value;
+  xhttp.onload = (el) => {
+    const response = JSON.parse(el.target.response);
+    if (response.msg) {
+      return alert(response.msg);
+    }
+    response.arry.forEach((el) => {
+      let elementP = document.createElement("p");
+      elementP.innerText = el;
+      result.appendChild(elementP);
+    });
+  };
+  xhttp.open(
+    "POST",
+    `http://localhost:3000/generate/ganjil?input=` + value,
+    true
+  );
+  xhttp.send();
+};
+const prima = () => {
+  result.innerHTML = "";
+  let value = input.value;
+  xhttp.onload = (el) => {
+    const response = JSON.parse(el.target.response);
+    if (response.msg) {
+      return alert(response.msg);
+    };
+    response.arry.forEach((el) => {
+      let elementP = document.createElement("p");
+      elementP.innerText = el;
+      result.appendChild(elementP);
+    });
+  };
+  xhttp.open(
+    "POST",
+    `http://localhost:3000/generate/prima?input=` + value,
+    true
+  );
+  xhttp.send();
+};
